@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayoutCompat"
@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
+    android:layout_gravity="center"
     tools:context=".RegisterActivity">
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -14,31 +15,25 @@
         android:layout_width="212dp"
         android:layout_height="43dp"
         android:hint="Username"
+        android:layout_gravity="center"
         android:textColor="#FAFAFA"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="152dp" />
+        android:textColorHint="#FFFFFF" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/password"
+        android:layout_gravity="center"
         android:layout_width="211dp"
         android:layout_height="41dp"
         android:hint="Password"
         android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="274dp" />
+        android:textColorHint="#FFFFFF" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="383dp"/>
+        android:layout_gravity="center"
+        android:text="Register" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
