@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -63,9 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(
                                 RegisterActivity.this,
-                                "Failed to create user.",
+                                "Failed to create user: "+e.getMessage().toString(),
                                 Toast.LENGTH_LONG
                         ).show();
+                        Log.e("LoginActivity", "Failed Registration"+e.getMessage(), e);
+
                     }
                 });
             }
