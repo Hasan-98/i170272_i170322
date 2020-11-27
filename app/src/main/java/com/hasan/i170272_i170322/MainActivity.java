@@ -115,7 +115,10 @@ public class MainActivity extends AppCompatActivity {
                     "User Available: "+usr.getUid()+" "+usr.getEmail(),
                     Toast.LENGTH_LONG
                     ).show();
+            Intent intent=new Intent(this, HomeActivity.class);
+            startActivity(intent);
         }
+
     }
 
     @Override

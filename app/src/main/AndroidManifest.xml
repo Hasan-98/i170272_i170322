@@ -11,37 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".HomeActivity"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegOrLoginActivity" />
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".Second"/>
 
-<!--<<<<<<< HEAD-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-        <activity android:name=".Second">
-        </activity>
-
-<!--        <activity-->
-<!--            android:name=".ui.login.RegisterActivity"-->
-<!--            android:label="@string/title_activity_register" />-->
-=======
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-<!--        </activity> &lt;!&ndash; <activity &ndash;&gt;-->
-        <!-- android:name=".ui.login.RegisterActivity" -->
-        <!-- android:label="@string/title_activity_register" /> -->
-<!--&gt;>>>>>> b1-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
