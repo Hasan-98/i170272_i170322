@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +55,12 @@ public class RegisterActivity extends AppCompatActivity {
                                     RegisterActivity.this,
                                     authentication.getCurrentUser().getUid(),
                                     Toast.LENGTH_LONG
-                            ).show();                        }
+                            ).show();
+
+                            Intent intent=new Intent(RegisterActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 })
 
@@ -83,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (user!=null){
             Toast.makeText(
                     RegisterActivity.this,
-                    user.getUid(),
+                    "Logged In With User: "+user.getUid(),
                     Toast.LENGTH_SHORT
             ).show();
         }
