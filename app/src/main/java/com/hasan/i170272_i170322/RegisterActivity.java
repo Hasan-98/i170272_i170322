@@ -54,7 +54,9 @@ public class RegisterActivity extends AppCompatActivity {
                                     RegisterActivity.this,
                                     authentication.getCurrentUser().getUid(),
                                     Toast.LENGTH_LONG
-                            ).show();                        }
+                            ).show();
+
+                        }
                     }
                 })
 
@@ -83,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (user!=null){
             Toast.makeText(
                     RegisterActivity.this,
-                    user.getUid(),
+                    "Logged In With User: "+user.getUid(),
                     Toast.LENGTH_SHORT
             ).show();
         }
