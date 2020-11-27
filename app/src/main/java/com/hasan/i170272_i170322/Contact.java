@@ -2,14 +2,23 @@ package com.hasan.i170272_i170322;
 
 public class Contact {
 
-    private String name,phno,email;
+    private String name,phno,email, dpUri;
 
     public Contact(){}
 
-    public Contact(String name, String phno, String email) {
+    public String getDpUri() {
+        return dpUri;
+    }
+
+    public void setDpUri(String dpUri) {
+        this.dpUri = dpUri;
+    }
+
+    public Contact(String name, String phno, String email, String dpUri) {
         this.name = name;
         this.phno = phno;
         this.email = email;
+        this.dpUri=dpUri;
     }
 
     public String getName() {
