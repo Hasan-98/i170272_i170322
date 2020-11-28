@@ -3,6 +3,7 @@ package com.hasan.i170272_i170322;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -22,19 +23,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
 //    TextView uname;
     EditText chatText;
     ImageView chatSend;
-    RecyclerView chatRv;
 
     FirebaseUser fuser;
     DatabaseReference dbref;
 
     Intent i;
+
+    MyMessageAdapter msgAda;
+    List<Msg> mChat;
+    RecyclerView chatRv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,19 +58,28 @@ public class ChatActivity extends AppCompatActivity {
         final String uname=i.getStringExtra("uname");
         dbref= FirebaseDatabase.getInstance().getReference("chats").child(myCname);
 
-//        dbref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Contact user=dataSnapshot.getValue(Contact.class);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        })
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Contact user=dataSnapshot.getValue(Contact.class);
+
+//                readMessages(fuser.getUid(),/*userid,*/ user.getDpUri());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         chatRv=findViewById(R.id.chatRv);
+        chatRv.setHasFixedSize(true);
+        LinearLayoutManager linlyman=new LinearLayoutManager(getApplicationContext());
+        linlyman.setStackFromEnd(true);
+        chatRv.setLayoutManager(linlyman);
+        chatRv.setAdapter(msgAda);
+
+
         chatText=findViewById(R.id.chatText);
         chatSend=findViewById(R.id.chatSend);
         chatSend.setOnClickListener(new View.OnClickListener() {
@@ -72,20 +87,20 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String msg=chatText.getText().toString();
 
-                if(uname==null) {
-                    Toast.makeText(
-                            ChatActivity.this,
-                            "OOOOOO",
-                            Toast.LENGTH_LONG
-                    ).show();
-                }
-                else{
-                    Toast.makeText(
-                            ChatActivity.this,
-                            uname,
-                            Toast.LENGTH_LONG
-                    ).show();
-                }
+//                if(uname==null) {
+//                    Toast.makeText(
+//                            ChatActivity.this,
+//                            "OOOOOO",
+//                            Toast.LENGTH_LONG
+//                    ).show();
+//                }
+//                else{
+//                    Toast.makeText(
+//                            ChatActivity.this,
+//                            uname,
+//                            Toast.LENGTH_LONG
+//                    ).show();
+//                }
                 sendMessage(uname, msg, myCname);
             }
         });
@@ -102,5 +117,32 @@ public class ChatActivity extends AppCompatActivity {
         DatabaseReference dbref=FirebaseDatabase.getInstance().getReference();
         dbref.child("chats").push().setValue(hmap);
 
+    }
+
+    private void readMessages(final String myId,/* final String userID,*/ final String imageUrl){
+        mChat=new ArrayList<>();
+
+        dbref=FirebaseDatabase.getInstance().getReference("chats");
+
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mChat.clear();
+
+                for (DataSnapshot s: dataSnapshot.getChildren()){
+                    Msg newMsg=s.getValue(Msg.class);
+//                    if (newMsg.getReceiver().equals(myId) && newMsg.getSender().equals(userID))
+                    mChat.add(newMsg);
+                }
+
+                msgAda=new MyMessageAdapter(mChat, ChatActivity.this, imageUrl);
+                chatRv.setAdapter(msgAda);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
     }
 }
