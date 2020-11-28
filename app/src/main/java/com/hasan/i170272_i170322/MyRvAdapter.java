@@ -2,6 +2,7 @@ package com.hasan.i170272_i170322;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyRvAdapter extends RecyclerView.Adapter<MyRvAdapter.MyViewHolder> {
     List<Contact> ls;
     Context c;
-    public MyRvAdapter(List<Contact> ls, Context c) {
+    String usr, email;
+
+    public MyRvAdapter(List<Contact> ls, Context c, String email) {
         this.c=c;
         this.ls=ls;
+        this.email=email;
     }
     @NonNull
     @Override
@@ -39,11 +43,19 @@ public class MyRvAdapter extends RecyclerView.Adapter<MyRvAdapter.MyViewHolder> 
         holder.email.setText(ls.get(position).getEmail());
         Picasso.get().load(ls.get(position).getDpUri()).into(holder.rowDp);
 
+//        holder.email.getText().toString()
+        if (this.usr==null && holder.email.getText().toString().contentEquals(this.email)){
+            usr=holder.name.getText().toString();
+            Log.d("ABC", holder.email.getText().toString()+"--"+this.email);
+
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(c, ChatActivity.class);
-                i.putExtra("name", holder.name.getText());
+                i.putExtra("rname", holder.name.getText());
+                i.putExtra("uname",usr);
                 c.startActivity(i);
             }
         });

@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +37,8 @@ public class HomeActivity extends AppCompatActivity {
         dbref= FirebaseDatabase.getInstance().getReference("contacts");
 
         contacts=new ArrayList<>();
-        final MyRvAdapter adapter=new MyRvAdapter(contacts,this);
+        final MyRvAdapter adapter=new MyRvAdapter(contacts,this,
+                FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         add=findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
